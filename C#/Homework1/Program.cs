@@ -1,5 +1,5 @@
 ﻿// Задача 2
-Console.Write("Введите превое число ");
+Console.Write("Введите первое число ");
 int a = int.Parse(Console.ReadLine());
 Console.Write("Введите второе число ");
 int b = int.Parse(Console.ReadLine());
@@ -10,11 +10,11 @@ else{
     Console.WriteLine($"Максимальное значение {b}");
 }
 // Задача 4
-Console.Write("Введите превое число ");
+Console.Write("Введите первое число ");
 int c = int.Parse(Console.ReadLine());
 Console.Write("Введите второе число ");
 int d = int.Parse(Console.ReadLine());
-Console.Write("Введите Третье число ");
+Console.Write("Введите третье число ");
 int e = int.Parse(Console.ReadLine());
 if(c > d){
     if(c > e){
