@@ -1,9 +1,15 @@
-﻿// хотелось бы уточнить почему этот код работает только до 2-х?
-Console.WriteLine("Введите число");
-double number = double.Parse(Console.ReadLine());
-for (double i = 0; i <= number; i++)
+﻿Console.WriteLine("Введите пятизначное число");
+string number = Console.ReadLine();
+string reverse_number = number.Reverse(number);
+if (number.Lehgth() != 5)
 {
-    double j = i;
-    i = Math.Pow(i,3);
-    Console.WriteLine($"куб {j} равен {i}");
+    Console.WriteLine("Количество знаков не равно 5");
 }
+    else if (number == reverse_number)
+    {
+        Console.WriteLine("Число является полиндромом");
+    }
+    else
+    {
+        Console.WriteLine("Число не является полиндромом");
+    }
