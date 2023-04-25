@@ -1,5 +1,4 @@
-﻿using System.Net.Http.Headers;
-using System;
+﻿using System;
 using System.Security.Cryptography;
 string input (string text)
 {
@@ -87,11 +86,11 @@ int find_max (int[] numbers)
 
 void Fill_user_double_numbers(double[,] numbers, double minvalue = -1000, double maxvalue = 1000)
 {
-    Random rnd = new Random();
+    Random random = new Random();
     maxvalue++;
     for (int i = 0; i < numbers.Length; i++)
         {
-            numbers[i] = rnd.
+            numbers[i] = random.NextDo
         }
 }
 
