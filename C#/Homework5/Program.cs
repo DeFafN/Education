@@ -27,12 +27,12 @@ int Even(int[] numbers)
     int count = 0;
         for (int i = 0; i < numbers.Length; i++)
         {
-            if (i % 2 == 0)
-            count+=
+            if (numbers[i] % 2 == 0)
+            count++;
         }
     return count;
 }
 Fill(numbers);
 Console.WriteLine("созданный массив:");
 Print(numbers);
-Even(numbers);
+Console.WriteLine(Even(numbers));
