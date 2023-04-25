@@ -84,13 +84,12 @@ int find_max (int[] numbers)
     return max;    
 }
 
-void Fill_user_double_numbers(double[,] numbers, double minvalue = -1000, double maxvalue = 1000)
+void Fill_user_double_numbers(double[] numbers)
 {
     Random random = new Random();
-    maxvalue++;
-    for (int i = 0; i < numbers.Length; i++)
+        for (int i = 0; i < numbers.Length; i++)
         {
-            numbers[i] = random.NextDo
+            numbers[i] = random.NextDouble();
         }
 }
 
@@ -127,13 +126,13 @@ void not_even_index()
 
 Console.WriteLine("Введите размер массива");
 int size = int.Parse(Console.ReadLine());
-int[] numbers = new int[size];
-Fill_user_double_numbers();
+double[] numbers = new double[size];
+Fill_user_double_numbers(numbers);
 Console.WriteLine("Созданный массив:");
 Print(numbers);
-int min =  find_min(numbers);
-int max = find_max(numbers);
-int result = max - min;
+double min = find_min(numbers);
+double max = find_max(numbers);
+double result = max - min;
 Console.WriteLine($"Минимальное значение: {find_min(numbers)}");
 Console.Write($"Максимальное значение: {find_max(numbers)}");
 
