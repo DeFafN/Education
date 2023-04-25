@@ -1,4 +1,7 @@
-﻿string input (string text)
+﻿using System.Net.Http.Headers;
+using System;
+using System.Security.Cryptography;
+string input (string text)
 {
     Console.Write($"{text}");
     return Console.ReadLine();
@@ -56,6 +59,43 @@ int sum_not_even_numbers (int[] numbers)
     return result;    
 }
 
+int find_min (int[] numbers)
+{
+    int min = numbers[0];
+    for (int i = 0; i < numbers.Length; i++)
+    {
+        if (numbers[i] < min)
+        {
+            min = numbers[i];
+        }
+    }
+    return min;    
+}
+
+int find_max (int[] numbers)
+{
+    int max = numbers[0];
+    for (int i = 0; i < numbers.Length; i++)
+    {
+        if (numbers[i] > max)
+        {
+            max = numbers[i];
+        }
+    }
+    return max;    
+}
+
+void Fill_user_double_numbers(double[,] numbers, double minvalue = -1000, double maxvalue = 1000)
+{
+    Random rnd = new Random();
+    maxvalue++;
+    for (int i = 0; i < numbers.Length; i++)
+        {
+            numbers[i] = rnd.
+        }
+}
+
+
 // Задайте массив заполненный случайными положительными трёхзначными числами.
 // Напишите программу, которая покажет количество чётных чисел в массиве.
 //[345, 897, 568, 234] -> 2
@@ -81,12 +121,20 @@ void not_even_index()
     Fill_user_numbers(numbers, -100, 500);
     Console.WriteLine("Созданный массив:");
     Print(numbers);
-    Console.WriteLine($"Сумма нечётных элементовсозданного массива: {sum_not_even_numbers(numbers)}");
+    Console.WriteLine($"Сумма нечётных элементов созданного массива: {sum_not_even_numbers(numbers)}");
 }
 // Задайте массив вещественных чисел. Найдите разницу между максимальным и минимальным элементами массива.
 // [3,21 7,04 22,93 -2,71 78,24] -> 80,95
 
-
-
-
+Console.WriteLine("Введите размер массива");
+int size = int.Parse(Console.ReadLine());
+int[] numbers = new int[size];
+Fill_user_double_numbers();
+Console.WriteLine("Созданный массив:");
+Print(numbers);
+int min =  find_min(numbers);
+int max = find_max(numbers);
+int result = max - min;
+Console.WriteLine($"Минимальное значение: {find_min(numbers)}");
+Console.Write($"Максимальное значение: {find_max(numbers)}");
 
