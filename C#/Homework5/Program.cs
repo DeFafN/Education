@@ -147,4 +147,3 @@ void min_max()
     Console.WriteLine($"Максимальное значение: {find_max(numbers)}");
     Console.WriteLine($"Разница между максимальным и минимальным: {result}");
 }   
-min_max();
