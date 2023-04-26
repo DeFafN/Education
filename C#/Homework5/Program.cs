@@ -58,9 +58,9 @@ int sum_not_even_numbers (int[] numbers)
     return result;    
 }
 
-int find_min (int[] numbers)
+double find_min (double[] numbers)
 {
-    int min = numbers[0];
+    double min = numbers[0];
     for (int i = 0; i < numbers.Length; i++)
     {
         if (numbers[i] < min)
@@ -71,9 +71,9 @@ int find_min (int[] numbers)
     return min;    
 }
 
-int find_max (int[] numbers)
+double find_max (double[] numbers)
 {
-    int max = numbers[0];
+    double max = numbers[0];
     for (int i = 0; i < numbers.Length; i++)
     {
         if (numbers[i] > max)
@@ -89,10 +89,18 @@ void Fill_user_double_numbers(double[] numbers)
     Random random = new Random();
         for (int i = 0; i < numbers.Length; i++)
         {
-            numbers[i] = random.NextDouble();
+            numbers[i] = Math.Round(random.NextDouble() * 10 - 5, 1);
         }
 }
 
+void Print_double(double[] numbers)
+{
+    for (int i = 0; i < numbers.Length; i++)
+    {
+        Console.Write($"{numbers[i]} ");
+    }
+    Console.WriteLine();
+}
 
 // Задайте массив заполненный случайными положительными трёхзначными числами.
 // Напишите программу, которая покажет количество чётных чисел в массиве.
@@ -124,15 +132,19 @@ void not_even_index()
 // Задайте массив вещественных чисел. Найдите разницу между максимальным и минимальным элементами массива.
 // [3,21 7,04 22,93 -2,71 78,24] -> 80,95
 
-Console.WriteLine("Введите размер массива");
-int size = int.Parse(Console.ReadLine());
-double[] numbers = new double[size];
-Fill_user_double_numbers(numbers);
-Console.WriteLine("Созданный массив:");
-Print(numbers);
-double min = find_min(numbers);
-double max = find_max(numbers);
-double result = max - min;
-Console.WriteLine($"Минимальное значение: {find_min(numbers)}");
-Console.Write($"Максимальное значение: {find_max(numbers)}");
-
+void min_max()
+{
+    Console.WriteLine("Введите размер массива");
+    int size = int.Parse(Console.ReadLine());
+    double[] numbers = new double[size];
+    Fill_user_double_numbers(numbers);
+    Console.WriteLine("Созданный массив:");
+    Print_double(numbers);
+    double min = find_min(numbers);
+    double max = find_max(numbers);
+    double result = max - min;
+    Console.WriteLine($"Минимальное значение: {find_min(numbers)}");
+    Console.WriteLine($"Максимальное значение: {find_max(numbers)}");
+    Console.WriteLine($"Разница между максимальным и минимальным: {result}");
+}   
+min_max();
