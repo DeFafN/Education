@@ -63,4 +63,3 @@ void Array()
         }
     Print(array);
 }
-Array();
