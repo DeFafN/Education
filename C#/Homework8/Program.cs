@@ -1,11 +1,14 @@
 ﻿// Задайте двумерный массив размером m×n, заполненный случайными вещественными числами.
-void 
-Console.WriteLine("Введите размер 1-го измерения массива");
-int firstLength = Convert.ToInt32(Console.ReadLine());
-Console.WriteLine("Введите размер 2-го измерения массива"); 
-int secondLength = Convert.ToInt32(Console.ReadLine());
-double[,] array = new double[firstLength, secondLength];
-Random rnd = new Random();
+void DoubleArray2D()
+{
+    Console.WriteLine("Введите размер 1-го измерения массива");
+    int firstLength = Convert.ToInt32(Console.ReadLine());
+    Console.WriteLine("Введите размер 2-го измерения массива");
+    int secondLength = Convert.ToInt32(Console.ReadLine());
+    double[,] array = new double[firstLength, secondLength];
+    Random rnd = new Random();
+}
+
 
 double[,] CreateTwoDimensionArray(double[,] array)
 {
