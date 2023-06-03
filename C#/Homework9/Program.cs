@@ -106,7 +106,7 @@ PrintArray(firstMartrix);
 Console.WriteLine("Вторая матрица:");
 PrintArray(secomdMartrix);
 MultiplyMatrix(firstMartrix, secomdMartrix);
-Console.WriteLine($"Произведение первой и второй матриц:");
+Console.WriteLine("Произведение первой и второй матриц:");
 PrintArray(MultiplyMatrix(firstMartrix,secomdMartrix));
 
 int[,] MultiplyMatrix(int[,] firstMartrix, int[,] secomdMartrix)
