@@ -38,6 +38,7 @@ int Akerman (int numberOne , int numberTwo)
     else if (numberTwo == 0)
         return numberOne + 1;
     else 
-        return Akerman(numberOne-1, Akerman(numberOne, numberTwo-1));
-}
-Console.WriteLine(Akerman(3,2));
+        return Akerman(numberOne-1, Akerman(numberOne, numberTwo-1)); // а вот здесь вопрос, 2,3 считает нормально, совпадает с таблицей, а 3,2 выдаёт 25, 
+}                                                                     // при этом этого значения в таблице из вики нет, если поменять местами аргументы в 41 строке
+Console.WriteLine(Akerman(3,2));                                      // то получается stack overflow, а если поменять местами аргументы в 34 строке,
+                                                                      // то stack overflow наступает почти сразу что я делаю е так?
