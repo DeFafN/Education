@@ -46,7 +46,7 @@ if (element1 < array.GetLength(0) && element2 < array.GetLength(1))
 {
     Console.WriteLine($"Элемент равен {array[element1, element2]}");
 }
-else // Вот здесь не понял почему не работает а выдаёт стандартную ошибку о том что индекс за пределами массива
+else 
 {
     Console.WriteLine($" Элемента не существует");
 }
