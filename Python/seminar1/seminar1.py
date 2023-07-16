@@ -54,9 +54,7 @@ else:
 # 100, а также если он кратен 400.
 
 yearNumber = int(input('Ввведите год: '))
-if yearNumber % 4 == 0 and yearNumber % 100 != 0:
-    print('Год является високосным')
-elif yearNumber % 400 == 0:
+if (yearNumber % 4 == 0 and yearNumber % 100 != 0) or yearNumber % 400 == 0:
     print('Год является високосным')
 else:
     print('Год не является високосным')
@@ -125,9 +123,7 @@ else:
 sizeA = int(input('Введите размер первой стороны шоколадки: '))
 sizeB = int(input('Введите размер второй стороны шоколадки: '))
 clove = int(input('Введите размер дольки: '))
-if clove > sizeA * sizeB:
-    print('Кушай воздух')
-elif clove % sizeA == 0 or clove % sizeB:
+if clove > sizeA * sizeB and (clove % sizeA == 0 or clove % sizeB == 0):
     print('Поделить можно')
 else:
     print('что-то пошло не так')
