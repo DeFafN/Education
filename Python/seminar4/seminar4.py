@@ -19,8 +19,8 @@
 #        if UniqeNumlist[j] > UniqeNumlist[j+1]:
 #            UniqeNumlist[j] = UniqeNumlist[j+1]
 
-#print(f'Уникальные элементы списков {uniquenumlist}') # вот тут вопрос, у меня как-то через раз получается что можество по-умолчанию 
-#                                                       # отсортировано в порядке возрастания, это нормально?
+#print(f'Уникальные элементы списков {uniquenumlist}') # вопрос по задаче: у меня как-то через раз получается что можество в 15 строке по-умолчанию 
+#                                                      # отсортировано в порядке возрастания, это нормально?
 
 # # В фермерском хозяйстве в Карелии выращивают чернику. Она растёт на круглой грядке, причём кусты высажены только по окружности. Таким образом, у каждого куста
 # # есть ровно два соседних. Всего на грядке растёт N кустов.
@@ -44,4 +44,4 @@ print(maxHarvest)
 for bash in range(len(gardenBeds)-2):
     if gardenBeds[bash] + gardenBeds[bash +1] + gardenBeds[bash + 2] > maxHarvest:
         maxHarvest = gardenBeds[bash] + gardenBeds[bash +1] + gardenBeds[bash + 2]
-print(maxHarvest)
+print(f'Максимальное количество ягод собранных за 1 раз: {maxHarvest}')
