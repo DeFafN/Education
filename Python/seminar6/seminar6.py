@@ -19,7 +19,12 @@ print(arithmeticProgression)
 
 numList = [-5, 9, 0, 3, -1, -2, 1, 4, -2, 10, 2, 0, -9, 8, 10, -9, 0, -5, -5, 7]
 indexList = []
+#for element in numList:
+#    if element > 5 and element <15:
+#      indexList.append(numList.index(element))
+#print(f'Индексы элементов в диапозоне от 5 до 15 {indexList}')
+
+# без накопителя
 for element in numList:
     if element > 5 and element <15:
-      indexList.append(numList.index(element))
-print(f'Индексы элементов в диапозоне от 5 до 15 {indexList}')
+      print(f'Индекс элемента {element} в диапозоне от 5 до 15 равен {numList.index(element)}')
