@@ -112,9 +112,9 @@ FindRythm(chant)
 
 def print_operation_table(operation, num_rows=6, num_columns=6):
     product = []
-    for i in range(1,num_rows):
+    for i in range(1,num_rows+1):
         row = []
-        for j in range(1, num_columns):
+        for j in range(1, num_columns+1):
             row.append(i*j)
         product.append(row)
     return print("\n".join(map(str,product)))
