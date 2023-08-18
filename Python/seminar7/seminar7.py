@@ -1,9 +1,9 @@
-﻿# # def func1(x):
-# #     return x
-# # print(func1(5))
+﻿def func1(x):
+    return x
+print(func1(5))
 
-# # func2 = lambda x: x
-# # print(func2(5))
+func2 = lambda x: x
+print(func2(5))
 
 
 # # У вас есть код, который вы не можете менять (так часто бывает, когда код в глубине программы используется множество раз и вы не хотите ничего сломать):
@@ -20,22 +20,22 @@
 # # Вывод:
 # # ok
 
-# values = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29]
-# transformation = list(filter(lambda x: x==x, values))
-# print(transformation)
+values = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29]
+transformation = list(filter(lambda x: x==x, values))
+print(transformation)
 
 # # с помощью лямбда и фильтра составить список из двух значных чисел. ввод "2 10 -32 8 1 78", вывод [10, -32, 78]
 
-# values = [2, 10, -32, 8, 1, 78]
-# newValues = list(filter(lambda x: 9 < abs(x) < 100 , values))
-# print(newValues)
+values = [2, 10, -32, 8, 1, 78]
+newValues = list(filter(lambda x: 9 < abs(x) < 100 , values))
+print(newValues)
 
-# values2 = '2 10 -32 8 1 78'
-# newValues = list(filter(lambda x: 9 < abs(x) < 100 , map(int, values2.split())))
-# print(newValues)
+values2 = '2 10 -32 8 1 78'
+newValues = list(filter(lambda x: 9 < abs(x) < 100 , map(int, values2.split())))
+print(newValues)
 
-# newValues = list(filter(lambda x: len(str(abs(int(x))))==2, values2.split()))
-# print(newValues)
+newValues = list(filter(lambda x: len(str(abs(int(x))))==2, values2.split()))
+print(newValues)
 
 # Планеты вращаются вокруг звезд по эллиптическим орбитам.
 # Назовем самой далекой планетой ту, орбита которой имеет самую большую площадь.
@@ -53,21 +53,20 @@
 # Ввод:orbits = [(1, 3), (2.5, 10), (7, 2), (6, 6), (4, 3)] print(*find_farthest_orbit(orbits))
 # Вывод: 2.5 10
 
-# orbits = [(1, 3), (2.5, 10), (7, 2), (6, 6), (4, 3)]
-# def farest_orbit(listOfOrbits):
-#     multiplication = max(halfaxisA*halfAsisB for halfaxisA,halfAsisB in orbits if halfaxisA!=halfAsisB)
-#     masxSqare = [(a,b) for a,b in orbits if a*b==multiplication]
-#     return masxSqare
+orbits = [(1, 3), (2.5, 10), (7, 2), (6, 6), (4, 3)]
+def farest_orbit(listOfOrbits):
+    multiplication = max(halfaxisA*halfAsisB for halfaxisA,halfAsisB in orbits if halfaxisA!=halfAsisB)
+    masxSqare = [(a,b) for a,b in orbits if a*b==multiplication]
+    return masxSqare
     
-# print(farest_orbit(orbits))
-
-
+print(farest_orbit(orbits))
 
 
 # в 2 строки для конкретно этого списка:
 
-# orbits = [(1, 3), (2.5, 10), (7, 2), (6, 6), (4, 3)]
-# print(*max(orbits, key = lambda x: (x[0] != x[1]) * x[0]*x[1]))
+orbits = [(1, 3), (2.5, 10), (7, 2), (6, 6), (4, 3)]
+print(*max(orbits, key = lambda x: (x[0] != x[1]) * x[0]*x[1]))
+
             
 # Винни-Пух попросил Вас посмотреть, есть ли в его стихах ритм.
 # Поскольку разобраться в его кричалках не настолько просто, насколько легко он их придумывает,
@@ -80,19 +79,19 @@
 # **Ввод:** пара-ра-рам рам-пам-папам па-ра-па-да    
 # **Вывод:** Парам пам-пам    
 
-# chant = input('Напиши кричалку: ').split()
-# def FindRythm(chant):
-#     vowelList = ['а', 'о', 'я', 'и', 'у', 'е', 'э', 'ю', 'ы' 'ё']
-#     count = 0
-#     for i in chant:
-#         for j in i:
-#             if j in vowelList:
-#                 count += 1
-#     if count % len(chant) == 0:
-#         return print('Парам пам-пам')
-#     else:
-#         return print('Пам парам')
-# FindRythm(chant)
+chant = input('Напиши кричалку: ').split()
+def FindRythm(chant):
+    vowelList = ['а', 'о', 'я', 'и', 'у', 'е', 'э', 'ю', 'ы' 'ё']
+    count = 0
+    for i in chant:
+        for j in i:
+            if j in vowelList:
+                count += 1
+    if count % len(chant) == 0:
+        return print('Парам пам-пам')
+    else:
+        return print('Пам парам')
+FindRythm(chant)
 
 
 # Напишите функцию print_operation_table(operation, num_rows=6, num_columns=6), 
@@ -118,9 +117,9 @@ def print_operation_table(operation, num_rows=6, num_columns=6):
         for j in range(1, num_columns):
             row.append(i*j)
         product.append(row)
-    product = str(*product)
-    return (product)
-print(print_operation_table(lambda x,y: x*y))
+    return print("\n".join(map(str,product)))
+
+print_operation_table(lambda x,y: x*y)
 
 
 
