@@ -68,42 +68,40 @@ def WriteTxt(filename,phoneBook):
         phout.write(f'{string[:-1]}\n')
 
 def PrintResult(phonebook):
-    with open ('phonebook.txt','a') as phout:
-        print(phout)
+    for record in phonebook:
+        print(', '.join(record.values()))
 
 def FindByLastname(phonebook, lastName):
-    with open ('phonebook.txt','r') as phf:
-        for line in phf:
-            if lastName == line[0]:
-                return print(line)
-            else:
-                return print('Такой абонент не найден')
-        
+    for record in phonebook:
+        if record['Фамилия'] == lastName:
+            return ', '.join(record.values())
+        return 'Такой абонент не найден'
+
 def ChangeNumber(phonebook, lastName, newNumber):
-    with open ('phonebook.txt','w') as phf:
-        for line in phf:
-            if lastName == line[0]:
-                line[2] = newNumber
-                return print('номер изменён')
-            else:
-                return print('Такой абонент не найден')                
+    found = False
+    for record in phonebook:
+        if record['Фамилия'] == lastName:
+            record['Телефон'] = newNumber
+            found = True
+            break
+    if found:
+        WriteTxt('phonebook.txt', phonebook)
+        return 'номер изменен'
+    else:
+        return 'Такой абонент не найден'
+
+
 def DeleteByLastname(phonebook, lastName):
-    with open ('phonebook.txt', 'r') as phf:
-        for line in phf:
-            if lastName == line[0]:
-                del phonebook[i]['lastName']
-                return print('Контакт удален')
-            else:
-                return print('Такой абонент не найден')
+    for i, record in enumerate(phonebook):
+        if record['Фамилия'] == lastName:
+            del phonebook[i]
+            WriteTxt('phonebook.txt', phonebook)
+            return 'Контакт удален'
+    return 'Такой абонент не найден'
             
 def AddUser(phonebook, userData):
-    user = {'Фамилия': userData[0], 'Имя':userData[1], 'Телефон':userData[2], 'Описание':userData[3]}
+    user = {'Фамилия': userData[0], 'Имя': userData[1], 'Телефон': userData[2], 'Описание': userData[3]}
     phonebook.append(user)
-    with open('phonebook.txt', 'w') as phout:
-        for i in range(len(phonebook)):
-            string = ''
-        for value in phonebook[i].values():
-            string += value+','
-        phout.write(f'{string[:-1]}\
+    WriteTxt('phonebook.txt', phonebook)
 
 WorkWithPhonebook()
