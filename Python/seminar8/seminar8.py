@@ -12,7 +12,7 @@
 # человека)
 # 4. Использование функций. Ваша программа
 # не должна быть линейной
-
+import os
 
 def WorkWithPhonebook():
     choise = ShowMenu()
@@ -47,20 +47,20 @@ def ShowMenu():
     '5. Найти абонента по номеру телефона\n'
     '6. Добавить абонента в справочник\n'
     '7. Закончить работу')
-    choice=int(input())
+    choice = int(input())
     return choice
 
 def ReadTxt(filename):
-    phoneBook=[]
+    phoneBook = []
     fields=['Фамилия', 'Имя', 'Телефон', 'Описание']
-    with open('phonebook.txt','r',encoding='utf-8') as phb:
+    with open('phonebook.txt','r') as phb:
         for line in phb:
             record=dict(zip(fields,line.strip().split(',')))
             phoneBook.append(record)
     return phoneBook
 
 def WriteTxt(filename,phoneBook):
-    with open('phonebook.txt','w',encoding='utf-8') as phout:
+    with open('phonebook.txt','w') as phout:
         for i in range(len(phoneBook)):
             string = ''
         for value in phoneBook[i].values():
@@ -68,18 +68,42 @@ def WriteTxt(filename,phoneBook):
         phout.write(f'{string[:-1]}\n')
 
 def PrintResult(phonebook):
-    phonebook = open('phonebook.txt', 'r')
-    phonebook.close
-    return print(phonebook)
+    with open ('phonebook.txt','a') as phout:
+        print(phout)
 
-# def FindByLastname(phonebook, lastName):
-    
-# def ChangeNumber(phonebook, lastName, newNumber):
-
-# def DeleteByLastname(phonebook, lastName):
-    
-# def AddUser(phonebook, userData):
-
-
+def FindByLastname(phonebook, lastName):
+    with open ('phonebook.txt','r') as phf:
+        for line in phf:
+            if lastName == line[0]:
+                return print(line)
+            else:
+                return print('Такой абонент не найден')
+        
+def ChangeNumber(phonebook, lastName, newNumber):
+    with open ('phonebook.txt','w') as phf:
+        for line in phf:
+            if lastName == line[0]:
+                line[2] = newNumber
+                return print('номер изменён')
+            else:
+                return print('Такой абонент не найден')                
+def DeleteByLastname(phonebook, lastName):
+    with open ('phonebook.txt', 'r') as phf:
+        for line in phf:
+            if lastName == line[0]:
+                del phonebook[i]['lastName']
+                return print('Контакт удален')
+            else:
+                return print('Такой абонент не найден')
+            
+def AddUser(phonebook, userData):
+    user = {'Фамилия': userData[0], 'Имя':userData[1], 'Телефон':userData[2], 'Описание':userData[3]}
+    phonebook.append(user)
+    with open('phonebook.txt', 'w') as phout:
+        for i in range(len(phonebook)):
+            string = ''
+        for value in phonebook[i].values():
+            string += value+','
+        phout.write(f'{string[:-1]}\
 
 WorkWithPhonebook()
