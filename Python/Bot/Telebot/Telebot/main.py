@@ -37,6 +37,7 @@ def get_profile(message):
     global PROFILE
     PROFILE = profile
     bot.register_next_step_handler(message, check)
+    return PROFILE
 print(PROFILE)
 # def get_name(message):
 #     global name
@@ -92,5 +93,17 @@ def check (message, candidat=CANDIDAT):
 @bot.message_handler(content_types=['text'])
 def handle_text(message):
     bot.send_message(message.from_user.id, "Напиши /help")
+
+bot.polling()
+
+import telebot
+
+bot = telebot.TeleBot('YOUR_TOKEN')
+
+@bot.message_handler(commands=['start'])
+def start_message(message):
+    chat_members = [message.from_user.id for message in bot.get_chat_members() if message.from_user.id != bot.user_info[0].id]  # получаем список участников чата
+    chat_member = chat_members[0]  # первый участник
+    bot.send_message(chat_member.id, f"Привет! Как дела?")
 
 bot.polling()
