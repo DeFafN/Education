@@ -12,12 +12,11 @@
 # человека)
 # 4. Использование функций. Ваша программа
 # не должна быть линейной
-import os
 
 def WorkWithPhonebook():
     choise = ShowMenu()
     phonebook = ReadTxt('phonebook.txt')
-    
+        
     while choise != 7:
         if choise == 1:
             PrintResult(phonebook)
@@ -32,12 +31,12 @@ def WorkWithPhonebook():
             lastName = input('Фамилия: ')
             print(DeleteByLastname(phonebook, lastName))
         elif choise == 5:            
-            number = input('Введите номер: ')
-            print(FindByLastname(phonebook, number))
+            phoneNumber = input('Введите номер: ')
+            print(FindByPhoneNumber(phonebook, phoneNumber))
         elif choise == 6:
             userData = input('Новый абонент: ')
             AddUser(phonebook, userData)
-            WriteTxt(phonebook.txt, phonebook)
+            WriteTxt(phonebook)
         choise = ShowMenu()
 def ShowMenu():
     print('1. Распечатать справочник\n'
@@ -55,40 +54,49 @@ def ReadTxt(filename):
     fields=['Фамилия', 'Имя', 'Телефон', 'Описание']
     with open('phonebook.txt','r') as phb:
         for line in phb:
-            record=dict(zip(fields,line.strip().split(',')))
+            lst1 = line.strip().split(',')
+            for element in range(len(lst1)):
+                lst1[element] = lst1[element].strip()
+            record=dict(zip(fields,lst1))
             phoneBook.append(record)
     return phoneBook
 
-def WriteTxt(filename,phoneBook):
-    with open('phonebook.txt','w') as phout:
-        for i in range(len(phoneBook)):
+def WriteTxt(filename):
+    with open('phonebook.txt','w') as phb:
+        for i in range(len(phb)):
             string = ''
-        for value in phoneBook[i].values():
-            string += value+','
-        phout.write(f'{string[:-1]}\n')
+            for value in phb[i].values():
+                string += value+','
+        phb.write(f'{string[:-1]}\n')
 
 def PrintResult(phonebook):
     for record in phonebook:
         print(', '.join(record.values()))
 
 def FindByLastname(phonebook, lastName):
+    shotlist = []
     for record in phonebook:
         if record['Фамилия'] == lastName:
-            return ', '.join(record.values())
+            shotlist.append(', '.join(record.values()))
+            return shotlist
+        return 'Такой абонент не найден'
+
+def FindByPhoneNumber(phonebook, phoneNumber):
+    shotlist = []
+    for record in phonebook:
+        if record['Телефон'] == phoneNumber:
+            shotlist.append(', '.join(record.values()))
+            return shotlist
         return 'Такой абонент не найден'
 
 def ChangeNumber(phonebook, lastName, newNumber):
-    found = False
+    
     for record in phonebook:
         if record['Фамилия'] == lastName:
             record['Телефон'] = newNumber
-            found = True
-            break
-    if found:
-        WriteTxt('phonebook.txt', phonebook)
-        return 'номер изменен'
-    else:
-        return 'Такой абонент не найден'
+            return 'номер изменен'
+        else:
+            return 'Такой абонент не найден'
 
 
 def DeleteByLastname(phonebook, lastName):
@@ -99,9 +107,8 @@ def DeleteByLastname(phonebook, lastName):
             return 'Контакт удален'
     return 'Такой абонент не найден'
             
-def AddUser(phonebook, userData):
-    user = {'Фамилия': userData[0], 'Имя': userData[1], 'Телефон': userData[2], 'Описание': userData[3]}
-    phonebook.append(user)
-    WriteTxt('phonebook.txt', phonebook)
+def AddUser(phonebook, user_data):
+    fields=['Фамилия', 'Имя', 'Телефон', 'Описание']
+    phonebook.append(dict(zip(fields, user_data)))
 
 WorkWithPhonebook()
