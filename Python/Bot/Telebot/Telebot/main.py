@@ -1,6 +1,5 @@
 ﻿import telebot
 import sqlite3 as DB
-import pandas as PD
 import datetime as DT
 from telebot import types
 from config import bot
@@ -212,14 +211,14 @@ def check (message):
             result_list.append(result_str)
 
         result_message = '\n'.join(result_list)
-        bot.send_message(message.from_user.id, f'{result_message},\n если всё верно напиши да, если есть ошибки напиши нет')
+        bot.send_message(message.from_user.id, f'{result_message},\n \n Если всё верно напиши да, если есть ошибки напиши нет')
         bot.register_next_step_handler(message, aprove)
         
 def aprove(message):
     aprove = message.text.lower()
     
     if aprove == "да":
-        bot.send_message(chat_id= , text=f'{result_message}')
+        bot.send_message(chat_id= 1315896344, text=f'{result_message}')
         bot.send_message(message.from_user.id, f'Кандидат направлен модератору')
     else:
         bot.register_next_step_handler(message, commands)
