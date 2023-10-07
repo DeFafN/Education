@@ -218,7 +218,7 @@ def aprove(message):
     aprove = message.text.lower()
     
     if aprove == "да":
-        bot.send_message(chat_id= 1315896344, text=f'{result_message}')
+        bot.send_message(chat_id= , text=f'{result_message}')
         bot.send_message(message.from_user.id, f'Кандидат направлен модератору')
     else:
         bot.register_next_step_handler(message, commands)
