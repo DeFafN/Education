@@ -1,0 +1,33 @@
+@font-face {
+	font-family: "teddy";
+	src: url("../Fonts/teddy-bear.ttf")
+}
+
+body {
+background-color: lightgreen;
+}
+
+h1 {
+	color: blueviolet;
+	font-family: teddy;
+}
+
+h2 {
+	color: darkcyan
+}
+
+a {
+	color: azure
+}
+
+a:hover {
+	font-size: 2rem
+}
+
+.font {
+	font-size: 1.3rem;
+}
+
+img {
+	width: 500px;
+}
