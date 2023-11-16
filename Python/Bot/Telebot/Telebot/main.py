@@ -3,29 +3,6 @@ import sqlite3 as DB
 import datetime as DT
 from telebot import types
 from config import bot
-from colorama import init, Fore, Back, Style
-
-init()
-
-connection = DB.connect('bot.db')
-cursor = connection.cursor()
-cursor.execute('''
-CREATE TABLE IF NOT EXISTS Messages (
-profile TEXT,
-name TEXT,
-location TEXT,
-experience TEXT,
-salary TEXT,
-work_mode TEXT,
-stack TEXT,
-coment TEXT,         
-resume TEXT,
-hashtag TEXT,
-username TEXT,
-date timestamp)
-''')
-connection.commit()
-connection.close()
 
 username = '*'
 profile = '*'
@@ -50,7 +27,27 @@ HELP = """
 /stop - прекратить скрипт по передаче кандидата
 по вопросам работы бота писать @arpanov
 """
-        
+
+connection = DB.connect('bot.db')
+cursor = connection.cursor()
+cursor.execute('''
+CREATE TABLE IF NOT EXISTS Messages (
+profile TEXT,
+name TEXT,
+location TEXT,
+experience TEXT,
+salary TEXT,
+work_mode TEXT,
+stack TEXT,
+coment TEXT,         
+resume TEXT,
+hashtag TEXT,
+username TEXT,
+date timestamp)
+''')
+connection.commit()
+connection.close()
+       
 @bot.message_handler(commands = ['start', 'stop' 'help'])
 def commands(message):
     global HELP
@@ -61,8 +58,8 @@ def commands(message):
         username = message.from_user.first_name + " " + message.from_user.last_name
         bot.send_message(message.from_user.id, "Укажи профиль кандидата")
         bot.register_next_step_handler(message, get_profile)
-    elif message.text == "/stop":
-        bot.send_message(message.from_user.id, "Ну нет так нет")
+    # elif message.text == "/stop":
+    #     bot.send_message(message.from_user.id, "Ну нет так нет")
     else:
         bot.send_message(message.chat.id, "Напиши /help")
 
@@ -165,7 +162,7 @@ def get_hashtag(message):
             bot.send_message(message.from_user.id, 'Перебор с тэгами')
             bot.register_next_step_handler(message, get_hashtag)
         else:
-            bot.send_message(message.from_user.id, 'проверь всё-ли верно в следующем сообщении, а сейчас напиши что-нибудь')
+            bot.send_message(message.from_user.id, 'Проверь всё-ли верно в следующем сообщении, а сейчас напиши что-нибудь')
             bot.register_next_step_handler(message, check)
 
 def check (message):
@@ -197,10 +194,7 @@ def check (message):
         cursor.execute("""INSERT INTO Messages (username, profile, name, location, salary, work_mode, stack, experience, resume,
         coment, hashtag, date) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)""", (data))
         connection.commit()
-        connection.close()
-        connection = DB.connect('bot.db')
-        cursor = connection.cursor()
-        temp = cursor.execute("""SELECT * FROM Messages ORDER BY date DESC LIMIT 1""")
+        cursor.execute("""SELECT * FROM Messages ORDER BY date DESC LIMIT 1""")
         raw = cursor.fetchall()
         candidat = list(zip(*raw))
         connection.close()
@@ -218,7 +212,7 @@ def aprove(message):
     aprove = message.text.lower()
     
     if aprove == "да":
-        bot.send_message(chat_id= , text=f'{result_message}')
+        bot.send_message(chat_id=1315896344, text=f'{result_message}')
         bot.send_message(message.from_user.id, f'Кандидат направлен модератору')
     else:
         bot.register_next_step_handler(message, commands)
@@ -228,7 +222,7 @@ def aprove(message):
 def handle_text(message):
     if message.text == '/help' or message.text == '/start' or message.text == '/stop':
         bot.register_next_step_handler(message, commands)    
-    else: 
-        bot.send_message(message.from_user.id, "Напиши /help")
+    #else: 
+     #   bot.send_message(message.from_user.id, "Напиши /help")
 
 bot.polling()
