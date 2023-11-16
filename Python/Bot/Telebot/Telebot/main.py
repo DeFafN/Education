@@ -191,11 +191,11 @@ def check (message):
         connection = DB.connect('bot.db')
         cursor = connection.cursor()
         data = (username, profile, name, location, salary, work_mode, stack, experience, resume, coment, hashtag, date,)
-        cursor.execute("""INSERT INTO Messages (username, profile, name, location, salary, work_mode, stack, experience, resume,
-        coment, hashtag, date) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)""", (data))
+        cursor.execute("""INSERT INTO Messages (username, profile, name, location, salary, work_mode, stack, experience, resume, coment, hashtag, date)
+                       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)""", (data))
         connection.commit()
         cursor.execute("""SELECT * FROM Messages ORDER BY date DESC LIMIT 1""")
-        raw = cursor.fetchall()
+        raw =  cursor.fetchall()
         candidat = list(zip(*raw))
         connection.close()
         new_kandidat = candidat[0:-2]
