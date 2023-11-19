@@ -21,12 +21,6 @@ boxes = ['Профиль', 'Фамилия и инициалы', 'Локация
          'Комментарий от рекрутера', 'Резюме', 'Хэштеги']
 result_list = []
 result_message = ''
-HELP = """ 
-/help - помощь
-/start - отправить информацию по кандидату
-/stop - прекратить скрипт по передаче кандидата
-по вопросам работы бота писать @arpanov
-"""
 
 connection = DB.connect('bot.db')
 cursor = connection.cursor()
@@ -48,20 +42,26 @@ date timestamp)
 connection.commit()
 connection.close()
        
-@bot.message_handler(commands = ['start', 'stop' 'help'])
-def commands(message):
-    global HELP
-    if message.text == "/help":
-        bot.send_message(message.chat.id, HELP)
-    elif message.text == "/start":
-        global username
-        username = message.from_user.first_name + " " + message.from_user.last_name
-        bot.send_message(message.from_user.id, "Укажи профиль кандидата")
-        bot.register_next_step_handler(message, get_profile)
-    # elif message.text == "/stop":
-    #     bot.send_message(message.from_user.id, "Ну нет так нет")
-    else:
-        bot.send_message(message.chat.id, "Напиши /help")
+@bot.message_handler(commands = ['start'])
+def start_command(message):
+    global username
+    username = message.from_user.first_name + " " + message.from_user.last_name + " " + message.from_user.username
+    bot.send_message(message.from_user.id, "Укажи профиль кандидата")
+    bot.register_next_step_handler(message, get_profile)
+
+@bot.message_handler(commands = ['stop'])
+def stop_command(message):    
+    bot.send_message(message.from_user.id, "Устал работать, если что напиши /start")
+    
+@bot.message_handler(commands = ['help'])
+def help_command(message):    
+    bot.send_message(message.from_user.id, """
+/help - помощь
+/start - отправить информацию по кандидату
+/stop - прекратить скрипт по передаче кандидата
+по вопросам работы бота писать @arpanov""")
+
+
 
 def get_profile(message):
     global profile
@@ -195,7 +195,7 @@ def check (message):
                        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)""", (data))
         connection.commit()
         cursor.execute("""SELECT * FROM Messages ORDER BY date DESC LIMIT 1""")
-        raw =  cursor.fetchall()
+        raw =  cursor.fetchmany(1)
         candidat = list(zip(*raw))
         connection.close()
         new_kandidat = candidat[0:-2]
@@ -207,22 +207,31 @@ def check (message):
         result_message = '\n'.join(result_list)
         bot.send_message(message.from_user.id, f'{result_message},\n \n Если всё верно напиши да, если есть ошибки напиши нет')
         bot.register_next_step_handler(message, aprove)
+        result_list = []
         
-def aprove(message):
-    aprove = message.text.lower()
-    
-    if aprove == "да":
-        bot.send_message(chat_id=1315896344, text=f'{result_message}')
-        bot.send_message(message.from_user.id, f'Кандидат направлен модератору')
-    else:
-        bot.register_next_step_handler(message, commands)
 
+def aprove(message):
+    aprove_text = str(message.text.lower())
+    
+    if aprove_text == "да":
+        bot.send_message(chat_id=1315896344, text=f'{result_message}')
+        bot.send_message(message.from_user.id, 'Кандидат направлен модератору')
+    elif aprove_text == "нет":
+        bot.send_message(message.from_user.id, 'Ну нет так нет, придётся начать сначала')
+        bot.register_next_step_handler(message, start_command)
+    else:
+        bot.send_message(message.from_user.id, 'Напиши да или нет')
+        bot.register_next_step_handler(message, aprove_text)
 
 @bot.message_handler(content_types=['text'])
 def handle_text(message):
-    if message.text == '/help' or message.text == '/start' or message.text == '/stop':
-        bot.register_next_step_handler(message, commands)    
-    #else: 
-     #   bot.send_message(message.from_user.id, "Напиши /help")
+    if message.text == '/help':
+        bot.register_next_step_handler(message, help_command)    
+    elif message.text == '/start':
+        bot.register_next_step_handler(message, start_command)    
+    elif message.text == '/stop':
+        bot.register_next_step_handler(message, stop_command)
+    else: 
+        bot.send_message(message.from_user.id, "Напиши /help")
 
-bot.polling()
+bot.polling(none_stop=True)
